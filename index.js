@@ -6,35 +6,6 @@ const inquirer = require('inquirer');
 
 let answers; 
 
-const markup = `
-
-## Project Title:
-
-
-
-## Table of Contents:
-
-
-
-## Installation:
-
-
-
-## License:
-
-
-
-## Contributing:
-
-
-
-## Tests:
-
-
-## Questions: 
-
-`;
-
 /* 
 https://wesbos.com/template-strings-html
 
@@ -119,9 +90,38 @@ answers = inquirer
 
 console.log("My motivation is" + " " + response.Motivation);
 
-console.log(`My motivation is ${response.Motivation}`);});
+console.log(`My motivation is ${response.Motivation}`);
 
 
+
+let markup = `
+
+## Project Title:
+
+${response.Motivation}
+
+## Table of Contents:
+
+
+
+## Installation:
+
+
+
+## License:
+
+
+
+## Contributing:
+
+
+
+## Tests:
+
+
+## Questions: 
+
+`;});
 
 
 
