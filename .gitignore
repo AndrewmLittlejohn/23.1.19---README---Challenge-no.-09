@@ -1,0 +1,6 @@
+// from challenge starter code
+
+node_modules
+package-lock.json
+.vscode
+.DS_Store
