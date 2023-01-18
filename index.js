@@ -20,77 +20,82 @@ let year = new Date();
 /* #region Main */ 
 inquirer
 .prompt([
-//   {
-//     type: 'input',
-//     message: 'Provide the email address you want associated with this project',
-//     name: 'email'
-//   },
-//   {
-//     type: 'input',
-//     message: 'please enter your Github username',
-//     name: 'userID' 
-//   },
-  // {
-  //   type: 'input',
-  //   message: 'Project Title?',
-  //   name: 'ProjectTitle',
-  // },
-  // {
-  //   // ideally the question would only populate if the GNU license is selected
-  //   type: 'input',
-  //   message: 'One line description',
-  //   name: 'OneLineDescription',
-  // },
-  // {
-  //   type: 'input',
-  //   message: 'What was your motivation?',
-  //   name: 'Motivation',
-  // },
-//   {
-//     type: 'input',
-//     message: 'Why did you build this project?',
-//     name: 'YourWhy',
-//   },
-//   {
-//     type: 'input',
-//     message: 'What problem does it solve?',
-//     name: 'ProblemSolved',
-//   },
-//   {
-//     type: 'input',
-//     message: 'What did you learn?',
-//     name: 'whatLearned',
-//   },
-//   {
-//     type: 'input',
-//     message: 'Provide Installation steps if needed:',
-//     name: 'Installation:',
-//   },
-//   {
-//     type: 'input',
-//     message: 'Provide instructions and examples for use:',
-//     name: 'Usage',
-//   },
-{
+  {
+    type: 'input',
+    message: 'Please enter your name, as you would like it to appear for legal purposes',
+    name: 'name',
+  },
+  {
+    type: 'input',
+    message: 'Provide the email address you want associated with this project',
+    name: 'email',
+  },
+  {
+    type: 'input',
+    message: 'please enter your Github username',
+    name: 'userID', 
+  },
+  {
+    type: 'input',
+    message: 'Project Title?',
+    name: 'ProjectTitle',
+  },
+  {
+    // ideally the question would only populate if the GNU license is selected
+    type: 'input',
+    message: 'One line description',
+    name: 'OneLineDescription',
+  },
+  {
+    type: 'input',
+    message: 'What was your motivation?',
+    name: 'Motivation',
+  },
+  {
+    type: 'input',
+    message: 'Why did you build this project?',
+    name: 'YourWhy',
+  },
+  {
+    type: 'input',
+    message: 'What problem does it solve?',
+    name: 'ProblemSolved',
+  },
+  {
+    type: 'input',
+    message: 'What did you learn?',
+    name: 'whatLearned',
+  },
+  {
+    type: 'input',
+    message: 'Provide Installation steps if needed:',
+    name: 'Installation:',
+  },
+  {
+    type: 'input',
+    message: 'Provide instructions and examples for use:',
+    name: 'Usage',
+  },
+  {
   type: 'list',
   message: 'Please select your license type.',
   choices: ['MIT License', 'GNU AGPLv3', 'The Unlicense'],
   name: 'LicenseSelected',
-},
-//   {
-//     type: 'input',
-//     message: 'List collaborator(s), if any, with link to their GitHub profile(s).',
-//     name: 'Collaborators',
-//   },
-//   { 
-//     type: 'input',
-//     message: 'list pertinent badges:',
-//     name: 'badges',
-//   },
-//   { type: 'input',
-//     message: 'Provide examples of tests for your application',
-//     name: 'Tests',
-//   },
+  },
+  {
+    type: 'input',
+    message: 'List collaborator(s), if any, with link to their GitHub profile(s).',
+    name: 'Collaborators',
+  },
+  { 
+    type: 'input',
+    message: 'list pertinent badges:',
+    name: 'badges',
+  },
+  { type: 'input',
+    message: 'Provide examples of tests for your application',
+    name: 'Tests',
+  },
 ])
 .then ((response) => {
 
@@ -101,7 +106,7 @@ inquirer
   switch(licenseStuff){
 
     case 'MIT License':
-        console.log(`Copyright ${year.getFullYear()} <COPYRIGHT HOLDER>
+        console.log(`Copyright ${year.getFullYear()} ${response.name}
 
         Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
         to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -116,8 +121,8 @@ inquirer
         break;
     case 'GNU AGPLv3':
         console.log(`${response.ProjectTitle} + "," + ${response.OneLineDescription} \n
-        <one line to give the program's name and a brief idea of what it does.>
-        Copyright (C) ${year.getFullYear()} <name of author>
+        ${response.OneLineDescription} \n
+        Copyright (C) ${year.getFullYear()} ${response.name}
     
         This program is free software: you can redistribute it and/or modify
         it under the terms of the GNU Affero General Public License as
@@ -144,17 +149,15 @@ inquirer
 
   ## Description:
 
-  - What was your Motivation?
+  - What was your Motivation? \n
   ${response.Motivation}
-  - Why did you build this project?
+  - Why did you build this project? \n
   ${response.YourWhy}
-  - What problem does it solve?
+  - What problem does it solve? \n
   ${response.ProblemSolved}
-  - What did you learn? 
+  - What did you learn? \n
   ${response.whatLearned}
   ## Table of Contents:
-
-  ## Table of Contents
 
 
   ## Installation:
