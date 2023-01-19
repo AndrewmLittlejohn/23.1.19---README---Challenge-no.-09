@@ -1,20 +1,28 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 
+// TODO: Create a function to initialize app
+// function init() {}
+
 const inquirer = require('inquirer');
 
 const filename = `GeneratedReadMe.md`;
 
 let year = new Date();
 
+// TODO: Create a function to initialize app
+// function init() {}
+
 
 // TODO: Create an array of questions for user input
-const questions = ['Please enter your name, as you would like it to appear for legal purposes', 'Provide the email address you want associated with this project', 'please enter your Github username',
+const questions = ['Please enter your name, as you would like it to appear for legal purposes', 'Provide the email address you want associated with this project', 'Please enter your Github username',
 'Project Title?', 'One line description', 'What was your motivation?', 'Why did you build this project?', 'What problem does it solve?', 'What did you learn?', 'Provide Installation steps if needed:'
-, 'Provide instructions and examples for use:', 'Please select your license type.', 'List collaborator(s), if any, with link to their GitHub profile(s).', 'Provide examples of tests for your application'];
+, 'Provide instructions and examples for use:', 'Please select your license type.', 'List collaborator(s), if any, with link to their GitHub profile(s). Use format -- Name, https://github.com/USERID',
+'Provide examples of tests for your application'];
 
 
-
+// Function call to initialize app
+// init();
 inquirer
 .prompt([
   {
@@ -30,7 +38,7 @@ inquirer
   {
     type: 'input',
     message: questions[2],
-    name: 'userID', 
+    name: 'gitId', 
   },
   {
     type: 'input',
@@ -91,7 +99,7 @@ inquirer
 ])
 .then ((response) => {
 
-  const filename = `ChallengeInput.md`;
+  const filename = `GeneratedREADME.md`;
   console.log("My motivation is" + " " + response.LicenseSelected);
 
   function getBadge(){
@@ -246,7 +254,7 @@ ${response.Tests}
   
 [Please contact me via email](mailto:${response.email}) with any questions \n
 
-[GitHub Profile](https://github.com/${response.UserId})
+[GitHub Profile](https://github.com/${response.gitId})
 
 `;
 
@@ -265,10 +273,6 @@ ${response.Tests}
 // Function call to initialize app
 // init();
 
-
-
-
-/* #endregion */
 
 
 
