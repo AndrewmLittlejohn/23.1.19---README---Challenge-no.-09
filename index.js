@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const inquirer = require('inquirer');
 let answers; 
-const filename = `ChallengeInput.md`;
+const filename = `GeneratedReadMe.md`;
 
 /* 
 https://wesbos.com/template-strings-html
@@ -69,7 +69,7 @@ inquirer
   {
     type: 'input',
     message: 'Provide Installation steps if needed:',
-    name: 'Installation:',
+    name: 'Installation',
   },
   {
     type: 'input',
@@ -102,45 +102,75 @@ inquirer
   const filename = `ChallengeInput.md`;
   console.log("My motivation is" + " " + response.LicenseSelected);
 
-  let licenseStuff = response.LicenseSelected
-  switch(licenseStuff){
-
-    case 'MIT License':
-        console.log(`Copyright ${year.getFullYear()} ${response.name}
-
-        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
-        to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
-        and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-        
-        The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-        
-        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
-        IN THE SOFTWARE.`);
-        break;
-    case 'GNU AGPLv3':
-        console.log(`${response.ProjectTitle} + "," + ${response.OneLineDescription} \n
-        ${response.OneLineDescription} \n
-        Copyright (C) ${year.getFullYear()} ${response.name}
-    
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU Affero General Public License as
-        published by the Free Software Foundation, either version 3 of the
-        License, or (at your option) any later version.
-    
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU Affero General Public License for more details.
-    
-        You should have received a copy of the GNU Affero General Public License
-        along with this program.  If not, see <https://www.gnu.org/licenses/>.`);
-        break;
-    case 'The Unlicense':
-        console.log('The Unlicense legal stuff');
-        break;
-    default: console.log('add manually');
+  function getLegalese() {
+ 
+    var msg
+    let licenseStuff = response.LicenseSelected
+  
+     switch(licenseStuff){
+  
+      case 'MIT License':
+          
+            msg =`Copyright ${year.getFullYear()} ${response.name}
+  
+          Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+          to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+          and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+          
+          The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+          
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+          FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+          LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+          IN THE SOFTWARE.`;
+          break;
+      case 'GNU AGPLv3':
+          msg = `${response.ProjectTitle} + "," + ${response.OneLineDescription} \n
+          ${response.OneLineDescription} \n
+          Copyright (C) ${year.getFullYear()} ${response.name}
+      
+          This program is free software: you can redistribute it and/or modify
+          it under the terms of the GNU Affero General Public License as
+          published by the Free Software Foundation, either version 3 of the
+          License, or (at your option) any later version.
+      
+          This program is distributed in the hope that it will be useful,
+          but WITHOUT ANY WARRANTY; without even the implied warranty of
+          MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+          GNU Affero General Public License for more details.
+      
+          You should have received a copy of the GNU Affero General Public License
+          along with this program.  If not, see <https://www.gnu.org/licenses/>.`;
+          break;
+      case 'The Unlicense':
+         msg = `This is free and unencumbered software released into the public domain.
+  
+          Anyone is free to copy, modify, publish, use, compile, sell, or
+          distribute this software, either in source code form or as a compiled
+          binary, for any purpose, commercial or non-commercial, and by any
+          means.
+          
+          In jurisdictions that recognize copyright laws, the author or authors
+          of this software dedicate any and all copyright interest in the
+          software to the public domain. We make this dedication for the benefit
+          of the public at large and to the detriment of our heirs and
+          successors. We intend this dedication to be an overt act of
+          relinquishment in perpetuity of all present and future rights to this
+          software under copyright law.
+          
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+          EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+          MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+          IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+          OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+          ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+          OTHER DEALINGS IN THE SOFTWARE.
+          
+          For more information, please refer to <https://unlicense.org>`;
+          break;
+      default: console.log('add manually');
+      }
+      return msg;
     }
 
   let markup = `
@@ -149,25 +179,33 @@ inquirer
 
   ## Description:
 
-  - What was your Motivation? \n
-  ${response.Motivation}
-  - Why did you build this project? \n
-  ${response.YourWhy}
-  - What problem does it solve? \n
-  ${response.ProblemSolved}
-  - What did you learn? \n
-  ${response.whatLearned}
+  #### - What was your Motivation? \n
+  ${response.Motivation} \n
+  #### - Why did you build this project? \n
+  ${response.YourWhy} \n
+  #### - What problem does it solve? \n
+  ${response.ProblemSolved} \n
+  #### - What did you learn? \n
+  ${response.whatLearned} \n 
+  
   ## Table of Contents:
 
+  <a href="#description">Description</a> \n
+  <a href="#Installation">Installation</a> \n
+  <a href="#License">License</a> \n
+  <a href="#Contributing">Contributing</a> \n
+  <a href="#Badges">Badges</a> \n
+  <a href="#Tests">Tests</a> \n
+  <a href="#Questions">Questions</a> \n
 
   ## Installation:
 
-  ${response.Installation}
+  ${response.Installation} 
 
   ## License:
 
   ${response.LicenseSelected}
-
+  ${getLegalese()} 
   ## Contributing:
 
   ${response.Collaborators}
@@ -182,9 +220,9 @@ inquirer
 
   ## Questions: 
 
-  [Please contact me via email](${response.email}) with any questions \n
+  
+  [Please contact me via email](mailto:andrewmlittlejohn@gmail.com) with any questions \n
   [GitHub Profile](https://github.com/${response.userID})
-
   `;
 
   fs.appendFile(filename, markup, (err) => 
